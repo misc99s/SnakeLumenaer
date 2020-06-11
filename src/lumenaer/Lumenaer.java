@@ -13,6 +13,7 @@ import display.HardwareMatrixCommunicator;
 import display.PixelMatrixPanel;
 
 import astroidsGame.MiniAstroidsGame;
+import snakeGame.MiniSnakeGame;
 
 /**
  * The lumenaer framework class for setting up games and displaying them either on
@@ -123,7 +124,7 @@ public class Lumenaer {
         frame.toFront();
 
         // later on: logic to change the current game
-        currentGame = new MiniAstroidsGame(pixelMatrix);
+        currentGame = new MiniSnakeGame(pixelMatrix);
 
         prepareExitHandler();
     }

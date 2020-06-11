@@ -50,7 +50,6 @@ public class MiniAstroidsGame extends Game {
 				projectiles.remove(p);
 			}
 		}
-
 		super.nextGameStep();
 	}
 
