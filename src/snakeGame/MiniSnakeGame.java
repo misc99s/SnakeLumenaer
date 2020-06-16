@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MiniSnakeGame extends Game {
-    private static ArrayList<Fruit> fruits;
-    private int numberOfFruits = 7;
+    //private ArrayList<Fruit> fruits = new ArrayList();
+    private int numberOfFruits = 10;
 
     private Snake[] snake;
     public MiniSnakeGame(PixelMatrix matrix) {
@@ -19,19 +19,21 @@ public class MiniSnakeGame extends Game {
         for(int i=0; i<numberOfFruits; i++) {
             createRandomFruit();
         }
+        System.out.println(graphicElements);
     }
 
     public void createRandomFruit() {
         int random = (int)Math.round(Math.random()*100);
         if(random <= 60){
             Fruit a = new AppleFruit();
-            fruits.add(a);
+            graphicElements.add(a);
+            a.render(pixelMatrix);
         } else if(random > 60 && random <= 80) {
             Fruit b = new BananaFruit();
-            fruits.add(b);
+            graphicElements.add(b);
         } else {
             Fruit c = new BlueBerryFruit();
-            fruits.add(c);
+            graphicElements.add(c);
         }
     }
 
