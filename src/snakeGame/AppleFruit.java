@@ -1,11 +1,17 @@
 package snakeGame;
 
 import graphics.Color;
+import lumenaer.PixelMatrix;
 
-abstract class AppleFruit extends Fruit {
+public class AppleFruit extends Fruit {
    Color color;
-    public AppleFruit(){
+    public AppleFruit() {
         super();
         color = new Color(247, 67, 67);
+    }
+
+    @Override
+    public void render(PixelMatrix matrix) {
+        matrix.setPixel(y, x, color);
     }
 }

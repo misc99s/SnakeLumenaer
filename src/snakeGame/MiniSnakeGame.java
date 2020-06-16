@@ -5,25 +5,33 @@ import graphics.Color;
 import lumenaer.Game;
 import lumenaer.PixelMatrix;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MiniSnakeGame extends Game {
-    List<Fruit>fruits;
+    private static ArrayList<Fruit> fruits;
+    private int numberOfFruits = 7;
 
     private Snake[] snake;
     public MiniSnakeGame(PixelMatrix matrix) {
         super(matrix);
         pixelMatrix.setBackgroundColor(new Color(119,217,126));
+        for(int i=0; i<numberOfFruits; i++) {
+            createRandomFruit();
+        }
     }
 
-    public void createRandomFruit(){
-        int random = (int) Math.random()*10;
-        if(random <= 6){
-
-        }else if(random > 6 && random <= 8){
-
-        }else if(random > 8 && random <= 10){
-
+    public void createRandomFruit() {
+        int random = (int)Math.round(Math.random()*100);
+        if(random <= 60){
+            Fruit a = new AppleFruit();
+            fruits.add(a);
+        } else if(random > 60 && random <= 80) {
+            Fruit b = new BananaFruit();
+            fruits.add(b);
+        } else {
+            Fruit c = new BlueBerryFruit();
+            fruits.add(c);
         }
     }
 
