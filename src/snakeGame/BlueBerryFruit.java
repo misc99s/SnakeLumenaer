@@ -6,7 +6,7 @@ import lumenaer.PixelMatrix;
 /**slows the snake down*/
 
 public class BlueBerryFruit extends Fruit {
-    Color color;
+    private Color color;
 
     public BlueBerryFruit() {
         super();

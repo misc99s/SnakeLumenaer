@@ -2,6 +2,8 @@ package lumenaer;
 
 import graphics.Color;
 import graphics.GraphicElement;
+import snakeGame.Snake;
+import snakeGame.MiniSnakeGame;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +21,10 @@ public abstract class Game {
 
     /* Array for storing all individual graphic objects to be drawn */
     protected List<GraphicElement> graphicElements;
+
+    protected List<Snake> snakeParts = new ArrayList<Snake>();
+
+    protected List<GraphicElement> balken = new ArrayList<GraphicElement>();
 
     /**
      * Constructor
@@ -46,6 +52,14 @@ public abstract class Game {
             element.render(pixelMatrix);
         }
 
+        for(Snake element : snakeParts){
+            element.update();
+            element.render(pixelMatrix);
+        }
+        for (GraphicElement element : balken){
+            element.update();
+            element.render(pixelMatrix);
+        }
     }
 
     /**

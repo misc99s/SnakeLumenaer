@@ -4,7 +4,7 @@ import graphics.Color;
 import lumenaer.PixelMatrix;
 
 public class AppleFruit extends Fruit {
-   Color color;
+    private Color color;
     public AppleFruit() {
         super();
         color = new Color(247, 67, 67);

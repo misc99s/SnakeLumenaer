@@ -6,7 +6,8 @@ import lumenaer.PixelMatrix;
 /**makes snake faster*/
 
 public class BananaFruit extends Fruit {
-    Color color;
+    private Color color;
+
     public BananaFruit() {
         super();
         color = new Color(246, 255, 0);
@@ -16,4 +17,7 @@ public class BananaFruit extends Fruit {
     public void render(PixelMatrix matrix) {
         matrix.setPixel(y, x, color);
     }
+
 }
+
+

@@ -13,7 +13,7 @@ abstract class Fruit extends GraphicElement {
 
     public Fruit() {
         super();
-        this.x = (int)Math.round(Math.random() * 24);
-        this.y = (int)Math.round(Math.random() * 24);
+        this.x = (int)Math.round(Math.random() * 23);
+        this.y = (int)Math.round(Math.random() * 22);
     }
 }
