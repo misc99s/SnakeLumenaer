@@ -22,9 +22,8 @@ public abstract class Game {
     /* Array for storing all individual graphic objects to be drawn */
     protected List<GraphicElement> graphicElements;
 
-    protected List<Snake> snakeParts = new ArrayList<Snake>();
-
-    protected List<GraphicElement> balken = new ArrayList<GraphicElement>();
+    protected List<Snake> snakeParts = new ArrayList<>();
+    protected List<GraphicElement> balken = new ArrayList<>();
 
     /**
      * Constructor
@@ -53,7 +52,8 @@ public abstract class Game {
         }
 
         for(Snake element : snakeParts){
-            element.update();
+            element.update(snakeParts);
+            // element.move();
             element.render(pixelMatrix);
         }
         for (GraphicElement element : balken){

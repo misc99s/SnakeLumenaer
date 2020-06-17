@@ -6,10 +6,14 @@ import lumenaer.PixelMatrix;
 /**slows the snake down*/
 
 public class BlueBerryFruit extends Fruit {
-    private Color color;
 
     public BlueBerryFruit() {
         super();
+        color = new Color(0, 213, 255);
+    }
+
+    public BlueBerryFruit(int x, int y) {
+        super(x, y);
         color = new Color(0, 213, 255);
     }
 

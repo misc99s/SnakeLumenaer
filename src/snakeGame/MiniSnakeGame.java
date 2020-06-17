@@ -12,16 +12,22 @@ import java.util.List;
 import static java.awt.Color.black;
 
 public class MiniSnakeGame extends Game {
-    //private ArrayList<Fruit> fruits = new ArrayList();
+    protected int [][] colorMatrix = new int[24][24];
     private int numberOfFruits = 10;
-    //private Snake[] snake;
+    private boolean stop = true;
     public MiniSnakeGame(PixelMatrix matrix) {
         super(matrix);
         pixelMatrix.setBackgroundColor(new Color(119,217,126));
+
+        for(int i=0; i<colorMatrix.length; i++) {
+            for(int j=0; j<colorMatrix[0].length; j++) {
+                colorMatrix[i][j] = -1;
+            }
+        }
+
         for(int i=0; i<numberOfFruits; i++) {
             createRandomFruit();
         }
-        System.out.println(graphicElements);
 
         for(int i = 0;  i < 3; i++) {
             snakeParts.add(new Snake(11, 22-i));
@@ -39,21 +45,31 @@ public class MiniSnakeGame extends Game {
 
     public void createRandomFruit() {
         int random = (int)Math.round(Math.random()*100);
+        int randomX = (int)Math.round(Math.random() * 23);
+        int randomY = (int)Math.round(Math.random() * 22);
         if(random <= 60){
-            Fruit a = new AppleFruit();
-            graphicElements.add(a);
+            graphicElements.add(new AppleFruit(randomX, randomY));
         } else if(random > 60 && random <= 80) {
-            Fruit b = new BananaFruit();
-            graphicElements.add(b);
+            graphicElements.add(new BananaFruit(randomX, randomY));
         } else {
-            Fruit c = new BlueBerryFruit();
-            graphicElements.add(c);
+            graphicElements.add(new BlueBerryFruit(randomX, randomY));
         }
+        colorMatrix[randomX][randomY] = graphicElements.size()-1;
+    }
+
+    public int[][] getColorMatrix() {
+        return colorMatrix;
     }
 
     @Override
     public void buzzered() {
-
+        if(stop) {
+            snakeParts.get(snakeParts.size()-1).setSpeedX(0);
+            snakeParts.get(snakeParts.size()-1).setSpeedY(0);
+        } else {
+            snakeParts.get(snakeParts.size()-1).setRichtung(snakeParts.get(snakeParts.size()-1).getRichtung());
+        }
+        stop = !stop;
     }
 
     @Override
@@ -63,6 +79,12 @@ public class MiniSnakeGame extends Game {
 
     @Override
     public void wheelRotation(int rotationValue) {
-
+        int richtung = snakeParts.get(snakeParts.size()-1).getRichtung();
+        if(rotationValue>0) { // Rechts abbiegen
+            richtung = (richtung-1)%4;
+        } else { // Links abbiegen
+            richtung = (richtung+1)%4;
+        }
+        snakeParts.get(snakeParts.size()-1).setRichtung(richtung);
     }
 }
