@@ -17,6 +17,7 @@ public class Snake extends GraphicElement {
     private int speedX;
     private int speedY;
     private int richtung;
+    private int snakeSpeed = 5;
 
     public Snake(int posX, int posY) {
         speedX = 0;  //move right
@@ -49,20 +50,23 @@ public class Snake extends GraphicElement {
     public int getRichtung() { return richtung; }
     public void setRichtung(int richtung) {
         this.richtung = richtung;
-        if(richtung == 0) {
+        if(richtung == 0) { //oben
             speedX = 0;
             speedY = -1;
-        } else if (richtung == 1) {
+        } else if (richtung == 1) { //links
             speedX = -1;
             speedY = 0;
-        } else if (richtung == 2) {
+        } else if (richtung == 2) { //unten
             speedX = 0;
             speedY = 1;
-        } else {
+        } else { //rechts
             speedX = 1;
             speedY = 0;
         }
     }
+
+    public int getSnakeSpeed(){return snakeSpeed;}
+    public void setSnakeSpeed(int snakeSpeed){this.snakeSpeed = snakeSpeed;}
 
     @Override
     public void render(PixelMatrix matrix) {

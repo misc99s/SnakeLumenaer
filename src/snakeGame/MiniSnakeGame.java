@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.awt.Color.black;
+import static java.lang.Thread.sleep;
 
 public class MiniSnakeGame extends Game {
     protected int [][] colorMatrix = new int[24][24];
@@ -63,6 +64,8 @@ public class MiniSnakeGame extends Game {
 
     @Override
     public void buzzered() {
+        /*
+    }
         if(stop) {
             snakeParts.get(snakeParts.size()-1).setSpeedX(0);
             snakeParts.get(snakeParts.size()-1).setSpeedY(0);
@@ -70,6 +73,7 @@ public class MiniSnakeGame extends Game {
             snakeParts.get(snakeParts.size()-1).setRichtung(snakeParts.get(snakeParts.size()-1).getRichtung());
         }
         stop = !stop;
+     */
     }
 
     @Override
@@ -79,12 +83,16 @@ public class MiniSnakeGame extends Game {
 
     @Override
     public void wheelRotation(int rotationValue) {
-        int richtung = snakeParts.get(snakeParts.size()-1).getRichtung();
-        if(rotationValue>0) { // Rechts abbiegen
-            richtung = (richtung-1)%4;
-        } else { // Links abbiegen
-            richtung = (richtung+1)%4;
+        int counter = 0;
+        int richtung = snakeParts.get(snakeParts.size() - 1).getRichtung();
+        if (counter % 4 == 0) {
+            if (rotationValue > 0) { // Rechts abbiegen
+                richtung = (richtung - 1) % 4;
+            } else { // Links abbiegen
+                richtung = (richtung + 1) % 4;
+            }
+            counter++;
+            snakeParts.get(snakeParts.size() - 1).setRichtung(richtung);
         }
-        snakeParts.get(snakeParts.size()-1).setRichtung(richtung);
     }
 }

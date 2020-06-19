@@ -18,6 +18,7 @@ public abstract class Game {
 
     /* A pixel matrix, where to displayPixelMatrix the game.*/
     protected PixelMatrix pixelMatrix; // just for convenience
+    protected int counter = 0;
 
     /* Array for storing all individual graphic objects to be drawn */
     protected List<GraphicElement> graphicElements;
@@ -41,25 +42,28 @@ public abstract class Game {
      * Logic can be extended in the derived classes.
      */
     public void nextGameStep() {
+        if(counter % snakeParts.get(snakeParts.size()-1).getSnakeSpeed() == 0) {
+            // set the background
+            pixelMatrix.drawBackground();
+            snakeParts.get(snakeParts.size()-1).setRichtung(snakeParts.get(snakeParts.size()-1).getRichtung());
 
-        // set the background
-        pixelMatrix.drawBackground();
+            //displayPixelMatrix everything
+            for (GraphicElement element : graphicElements) {
+                element.update();
+                element.render(pixelMatrix);
+            }
 
-        //displayPixelMatrix everything
-        for (GraphicElement element : graphicElements) {
-            element.update();
-            element.render(pixelMatrix);
+            for (Snake element : snakeParts) {
+                element.update(snakeParts);
+                // element.move();
+                element.render(pixelMatrix);
+            }
+            for (GraphicElement element : balken) {
+                element.update();
+                element.render(pixelMatrix);
+            }
         }
-
-        for(Snake element : snakeParts){
-            element.update(snakeParts);
-            // element.move();
-            element.render(pixelMatrix);
-        }
-        for (GraphicElement element : balken){
-            element.update();
-            element.render(pixelMatrix);
-        }
+        counter++;
     }
 
     /**
@@ -71,6 +75,4 @@ public abstract class Game {
     public abstract void buzzerReleased();
 
     public abstract void wheelRotation(int rotationValue);
-
-
 }
