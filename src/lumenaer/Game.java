@@ -21,10 +21,10 @@ public abstract class Game {
     protected int counter = 0;
 
     /* Array for storing all individual graphic objects to be drawn */
-    protected List<GraphicElement> graphicElements;
+    protected static List<GraphicElement> graphicElements;
 
-    protected List<Snake> snakeParts = new ArrayList<>();
-    protected List<GraphicElement> balken = new ArrayList<>();
+    protected static List<Snake> snakeParts = new ArrayList<>();
+    protected static List<GraphicElement> balken = new ArrayList<>();
 
     /**
      * Constructor
@@ -51,6 +51,18 @@ public abstract class Game {
             for (GraphicElement element : graphicElements) {
                 element.update();
                 element.render(pixelMatrix);
+
+                // Schlange verlängern wenn Frucht gegessen
+                if(Snake.getHead()) {
+                    int kopf = snakeParts.size()-1;
+                    int [][] a = MiniSnakeGame.getColorMatrix();
+                    int kopfNewX = snakeParts.get(kopf).getPosX() + snakeParts.get(kopf).getSpeedX();
+                    int kopfNewY = snakeParts.get(kopf).getPosY() + snakeParts.get(kopf).getSpeedY();
+                    int richtung = snakeParts.get(kopf).getRichtung();
+                    MiniSnakeGame.addNewSnakeHead(kopfNewX, kopfNewY);
+                    snakeParts.get(kopf).setRichtung(richtung);
+                    Snake.setHead(false);
+                }
             }
 
             for (Snake element : snakeParts) {
