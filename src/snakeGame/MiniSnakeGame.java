@@ -42,7 +42,7 @@ public class MiniSnakeGame extends Game {
         }
     }
 
-    public void createRandomFruit() {
+    public static void createRandomFruit() {
         int random = (int)Math.round(Math.random()*100);
         int randomX = (int)Math.round(Math.random() * 23);
         int randomY = (int)Math.round(Math.random() * 22);
@@ -71,6 +71,16 @@ public class MiniSnakeGame extends Game {
             balken.get(i).setColor(c);
         }
     }
+    public static Color getBalkenColor(int i) {
+        return balken.get(i).getColor();
+    }
+    public static void resetBalkenColor() {
+        for(int i=0; i<balken.size(); i++) {
+            balken.get(i).setColor(Color.BLACK);
+            Balken.resetFruitsEaten();
+        }
+    }
+
     public static int getFruitX (int i) {
         return graphicElements.get(i).getX();
     }
@@ -87,6 +97,43 @@ public class MiniSnakeGame extends Game {
         }
         stop = !stop;
      */
+        int blueBerry = 0;
+        boolean bb = false;
+        int banana = 0;
+        boolean ba = false;
+
+        // DOESN'T WORK YET
+        if(getBalkenColor(23).getBlue() != 0) {
+            for(int i=0; i<balken.size(); i++) {
+                // Bananen und Blaubeeren zählen
+                if (getBalkenColor(i).getGreen() == 0) {
+                    banana++;
+                } else blueBerry++;
+                // Balken leeren
+                resetBalkenColor();
+            }
+
+            // Abfrage mehr Bananen oder mehr Blaubeeren
+            if(blueBerry>4) {
+                bb = true;
+            } else if(banana>4) {
+                ba = true;
+            } else {
+                int random = (int) (Math.random()*10);
+                if(random>4) {
+                    bb = true;
+                } else ba = true;
+            }
+
+            // Schlange verlangsamen
+            if(bb) {
+                Snake.setSnakeSpeed(3);
+            }
+            // Schlange verschnellern
+            if(ba) {
+                Snake.setSnakeSpeed(7);
+            }
+        }
     }
 
     @Override

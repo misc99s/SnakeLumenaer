@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Snake extends GraphicElement {
-    private int maxX;
     private Color color;
     private int posX;
     private int posY;
@@ -20,12 +19,12 @@ public class Snake extends GraphicElement {
     private static int richtung;
     private static int snakeSpeed = 5;
     private static boolean head = false;
+    private static double time;
 
     public Snake(int posX, int posY) {
         speedX = 0;  //move right
         speedY = -1;  //move up, -speedY move down
         richtung = 0;
-        maxX = 21; //outermost right position
         color = new Color (74,43,27);
         this.posX = posX;
         this.posY = posY;
@@ -67,10 +66,12 @@ public class Snake extends GraphicElement {
         }
     }
 
-    public int getSnakeSpeed(){return snakeSpeed;}
-    public void setSnakeSpeed(int snakeSpeed){this.snakeSpeed = snakeSpeed;}
+    public static int getSnakeSpeed(){return snakeSpeed;}
+    public static void setSnakeSpeed(int s){snakeSpeed = s;}
     public static boolean getHead(){return head;}
     public static void setHead(boolean h){head = h;}
+    public static double getTime() {return time;}
+    public static void setTime(double t) {time = t;}
 
     @Override
     public void render(PixelMatrix matrix) {
@@ -112,17 +113,12 @@ public class Snake extends GraphicElement {
                 int r = MiniSnakeGame.getFruitColor(index).getRed();
                 int g = MiniSnakeGame.getFruitColor(index).getBlue();
                 int b = MiniSnakeGame.getFruitColor(index).getGreen();
-                System.out.println("rot " + r + " grün " + g + " blau " + b); // gibt für rgb immer 0 zurück ?
-                MiniSnakeGame.setBalkenColor(new Color(r, g, b));
-                //MiniSnakeGame.setBalkenColor(MiniSnakeGame.getFruitColor(index));
-                //MiniSnakeGame.setBalkenColor(new Color(255, 255, 255)); // funktioniert in weiß
+                System.out.println("rot " + r + " grün " + g + " blau " + b);
+                if(g!=67) { MiniSnakeGame.setBalkenColor(new Color(r, g, b)); }
+                //MiniSnakeGame.setBalkenColor(MiniSnakeGame.getFruitColor(index))
                 //System.out.println(MiniSnakeGame.getFruitColor(index));
 
                 // Frucht entfernen und Index in colorMatrix korrigieren
-
-                //GraphicElement frucht = (GraphicElement) MiniSnakeGame.getGraphicElements().get(a[kopfNewX][kopfNewY]);
-                //System.out.println(MiniSnakeGame.getGraphicElements().get(a[kopfNewX][kopfNewY]));
-                //MiniSnakeGame.getBalken().get(0).setColor(frucht.getColor());
                 System.out.println(MiniSnakeGame.getGraphicElements().size() + " Früchte");
                 MiniSnakeGame.getGraphicElements().remove(index);
                 System.out.println(MiniSnakeGame.getGraphicElements().size() + " Früchte");
@@ -131,10 +127,10 @@ public class Snake extends GraphicElement {
                     int y = MiniSnakeGame.getFruitY(i);
                     MiniSnakeGame.setColorMatrix(x, y, i);
                 }
+                // start time for new fruit
+                time = java.lang.System.currentTimeMillis();
 
-
-                //System.out.println(index);
-                Balken.setFruitsEaten();
+                if(g!=67) { Balken.setFruitsEaten(); }
                 System.out.println(Balken.getFruitsEaten() + " Früchte gegessen");
             }
         }

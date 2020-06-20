@@ -42,7 +42,7 @@ public abstract class Game {
      * Logic can be extended in the derived classes.
      */
     public void nextGameStep() {
-        if(counter % snakeParts.get(snakeParts.size()-1).getSnakeSpeed() == 0) {
+        if(counter % Snake.getSnakeSpeed() == 0) {
             // set the background
             pixelMatrix.drawBackground();
             snakeParts.get(snakeParts.size()-1).setRichtung(snakeParts.get(snakeParts.size()-1).getRichtung());
@@ -69,6 +69,13 @@ public abstract class Game {
                 element.update(snakeParts);
                 // element.move();
                 element.render(pixelMatrix);
+
+                // add new Fruit after time
+                int random = (int)(Math.random()*5 + 2);
+                if(java.lang.System.currentTimeMillis() > Snake.getTime()+random*1000 && Snake.getTime()>0) {
+                    MiniSnakeGame.createRandomFruit();
+                    Snake.setTime(0);
+                }
             }
             for (GraphicElement element : balken) {
                 element.update();

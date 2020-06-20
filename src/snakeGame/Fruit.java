@@ -7,9 +7,6 @@ import graphics.RectangleGraphicElement;
 import java.awt.*;
 
 abstract class Fruit extends GraphicElement {
-    protected int x;
-    protected int y;
-    protected Color color;
 
     public Fruit() {
         super();
