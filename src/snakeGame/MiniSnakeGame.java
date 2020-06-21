@@ -16,6 +16,7 @@ public class MiniSnakeGame extends Game {
     protected static int [][] colorMatrix = new int[24][24];
     private int numberOfFruits = 10;
     private boolean stop = true;
+    private static double timerSnakeSpeed = 0;
     //private int counter = 0;
     public MiniSnakeGame(PixelMatrix matrix) {
         super(matrix);
@@ -46,6 +47,10 @@ public class MiniSnakeGame extends Game {
         int random = (int)Math.round(Math.random()*100);
         int randomX = (int)Math.round(Math.random() * 23);
         int randomY = (int)Math.round(Math.random() * 22);
+        while(colorMatrix[randomX][randomY] != -1) {
+            randomX = (int)Math.round(Math.random() * 23);
+            randomY = (int)Math.round(Math.random() * 22);
+        }
         if(random <= 60){
             graphicElements.add(new AppleFruit(randomX, randomY));
         } else if(random > 60 && random <= 80) {
@@ -85,6 +90,8 @@ public class MiniSnakeGame extends Game {
         return graphicElements.get(i).getX();
     }
     public static int getFruitY (int i) { return graphicElements.get(i).getY(); }
+    public static double getTimerSnakeSpeed() { return timerSnakeSpeed; }
+    public static void setTimerSnakeSpeed() { timerSnakeSpeed = 0; }
 
     @Override
     public void buzzered() {
@@ -104,14 +111,14 @@ public class MiniSnakeGame extends Game {
 
         // DOESN'T WORK YET
         if(getBalkenColor(23).getBlue() != 0) {
-            for(int i=0; i<balken.size(); i++) {
+            for(int i=3; i<balken.size(); i+=4) {
                 // Bananen und Blaubeeren zählen
-                if (getBalkenColor(i).getGreen() == 0) {
+                if (getBalkenColor(i).getRed() == 246) {
                     banana++;
                 } else blueBerry++;
-                // Balken leeren
-                resetBalkenColor();
             }
+            // Balken leeren
+            resetBalkenColor();
 
             // Abfrage mehr Bananen oder mehr Blaubeeren
             if(blueBerry>4) {
@@ -127,12 +134,14 @@ public class MiniSnakeGame extends Game {
 
             // Schlange verlangsamen
             if(bb) {
-                Snake.setSnakeSpeed(3);
+                Snake.setSnakeSpeed(6);
             }
             // Schlange verschnellern
             if(ba) {
-                Snake.setSnakeSpeed(7);
+                Snake.setSnakeSpeed(2);
             }
+            // Timer starten für Normalgeschwindigkeit
+            timerSnakeSpeed = java.lang.System.currentTimeMillis();
         }
     }
 

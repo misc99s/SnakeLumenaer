@@ -10,14 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Snake extends GraphicElement {
-    private Color color;
-    private int posX;
-    private int posY;
-
     private static int speedX;
     private static int speedY;
     private static int richtung;
-    private static int snakeSpeed = 5;
+    private static int snakeSpeed = 4;
     private static boolean head = false;
     private static double time;
 
@@ -26,14 +22,14 @@ public class Snake extends GraphicElement {
         speedY = -1;  //move up, -speedY move down
         richtung = 0;
         color = new Color (74,43,27);
-        this.posX = posX;
-        this.posY = posY;
+        this.x = posX;
+        this.y = posY;
     }
 
-    public int getPosX() { return posX; }
-    public int getPosY() { return posY; }
-    public void setPosX(int posX) { this.posX = posX; }
-    public void setPosY(int posY) { this.posY = posY; }
+    public int getPosX() { return x; }
+    public int getPosY() { return y; }
+    public void setPosX(int posX) { this.x = posX; }
+    public void setPosY(int posY) { this.y = posY; }
 
     public int getSpeedX() {
         return speedX;
@@ -75,7 +71,7 @@ public class Snake extends GraphicElement {
 
     @Override
     public void render(PixelMatrix matrix) {
-        matrix.setPixel(posY, posX, color);
+        matrix.setPixel(y, x, color);
     }
 
     public void update(List<Snake> l) {
@@ -113,15 +109,12 @@ public class Snake extends GraphicElement {
                 int r = MiniSnakeGame.getFruitColor(index).getRed();
                 int g = MiniSnakeGame.getFruitColor(index).getBlue();
                 int b = MiniSnakeGame.getFruitColor(index).getGreen();
-                System.out.println("rot " + r + " grün " + g + " blau " + b);
                 if(g!=67) { MiniSnakeGame.setBalkenColor(new Color(r, g, b)); }
                 //MiniSnakeGame.setBalkenColor(MiniSnakeGame.getFruitColor(index))
                 //System.out.println(MiniSnakeGame.getFruitColor(index));
 
                 // Frucht entfernen und Index in colorMatrix korrigieren
-                System.out.println(MiniSnakeGame.getGraphicElements().size() + " Früchte");
                 MiniSnakeGame.getGraphicElements().remove(index);
-                System.out.println(MiniSnakeGame.getGraphicElements().size() + " Früchte");
                 for(int i=0; i<MiniSnakeGame.getGraphicElements().size(); i++) {
                     int x = MiniSnakeGame.getFruitX(i);
                     int y = MiniSnakeGame.getFruitY(i);
@@ -131,7 +124,7 @@ public class Snake extends GraphicElement {
                 time = java.lang.System.currentTimeMillis();
 
                 if(g!=67) { Balken.setFruitsEaten(); }
-                System.out.println(Balken.getFruitsEaten() + " Früchte gegessen");
+                System.out.println(getSnakeSpeed());
             }
         }
     }

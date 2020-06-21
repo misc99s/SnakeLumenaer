@@ -61,6 +61,7 @@ public abstract class Game {
                     int richtung = snakeParts.get(kopf).getRichtung();
                     MiniSnakeGame.addNewSnakeHead(kopfNewX, kopfNewY);
                     snakeParts.get(kopf).setRichtung(richtung);
+                    MiniSnakeGame.setColorMatrix(kopfNewX, kopfNewY, -1);
                     Snake.setHead(false);
                 }
             }
@@ -76,7 +77,14 @@ public abstract class Game {
                     MiniSnakeGame.createRandomFruit();
                     Snake.setTime(0);
                 }
+
+                // normalize snakeSpeed after time
+                if(java.lang.System.currentTimeMillis() > MiniSnakeGame.getTimerSnakeSpeed() + 6000 && MiniSnakeGame.getTimerSnakeSpeed()>0) {
+                    Snake.setSnakeSpeed(4);
+                    MiniSnakeGame.setTimerSnakeSpeed();
+                }
             }
+
             for (GraphicElement element : balken) {
                 element.update();
                 element.render(pixelMatrix);
