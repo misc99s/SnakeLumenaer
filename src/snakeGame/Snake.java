@@ -4,6 +4,7 @@ import graphics.Color;
 import graphics.GraphicElement;
 import graphics.SpriteGraphicElement;
 import graphics.SquareGraphicElement;
+import lumenaer.Game;
 import lumenaer.PixelMatrix;
 
 import java.util.ArrayList;
@@ -126,6 +127,8 @@ public class Snake extends GraphicElement {
                 if(g!=67) { Balken.setFruitsEaten(); }
                 System.out.println(getSnakeSpeed());
             }
+        } else {
+            Game.setGameOver(true);
         }
     }
 }

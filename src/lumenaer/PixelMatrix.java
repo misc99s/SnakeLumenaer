@@ -13,7 +13,7 @@ public class PixelMatrix {
 	private Color[][] pixelArray;
 
 	/* The background color for the pixel matrix*/
-	private Color backgroundColor;
+	private static Color backgroundColor;
 
 
 	public PixelMatrix(int height, int width) {
@@ -92,8 +92,8 @@ public class PixelMatrix {
 		return backgroundColor;
 	}
 
-	public void setBackgroundColor(Color backgroundColor) {
-		this.backgroundColor = backgroundColor;
+	public static void setBackgroundColor(Color bc) {
+		backgroundColor = bc;
 	}
 
 

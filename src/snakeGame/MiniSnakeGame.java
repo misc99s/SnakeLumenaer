@@ -14,6 +14,7 @@ import static java.lang.Thread.sleep;
 
 public class MiniSnakeGame extends Game {
     protected static int [][] colorMatrix = new int[24][24];
+    protected static int [][] gameOverMatrix = new int[24][24];
     private int numberOfFruits = 10;
     private boolean stop = true;
     private static double timerSnakeSpeed = 0;
@@ -21,7 +22,6 @@ public class MiniSnakeGame extends Game {
     public MiniSnakeGame(PixelMatrix matrix) {
         super(matrix);
         pixelMatrix.setBackgroundColor(new Color(119,217,126));
-
         for(int i=0; i<colorMatrix.length; i++) {
             for(int j=0; j<colorMatrix[0].length; j++) {
                 colorMatrix[i][j] = -1;

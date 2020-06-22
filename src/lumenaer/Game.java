@@ -2,6 +2,7 @@ package lumenaer;
 
 import graphics.Color;
 import graphics.GraphicElement;
+import snakeGame.GameOver;
 import snakeGame.Snake;
 import snakeGame.MiniSnakeGame;
 
@@ -19,6 +20,9 @@ public abstract class Game {
     /* A pixel matrix, where to displayPixelMatrix the game.*/
     protected PixelMatrix pixelMatrix; // just for convenience
     protected int counter = 0;
+    protected static boolean gameOver = false;
+    protected boolean youwon = false;
+
 
     /* Array for storing all individual graphic objects to be drawn */
     protected static List<GraphicElement> graphicElements;
@@ -90,6 +94,10 @@ public abstract class Game {
                 element.render(pixelMatrix);
             }
         }
+        if(gameOver){
+            GameOver gameOverScreen = new GameOver(2, 4);
+
+        }
         counter++;
     }
 
@@ -102,4 +110,12 @@ public abstract class Game {
     public abstract void buzzerReleased();
 
     public abstract void wheelRotation(int rotationValue);
+
+    public static boolean getGameOver(){
+        return gameOver;
+    }
+
+    public static void setGameOver(boolean gO){
+        gameOver = gO;
+    }
 }
