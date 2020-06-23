@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import static graphics.Color.BLACK;
+
 /**
  * Base class for all games. Own games must extend this class.
  *
@@ -21,7 +23,9 @@ public abstract class Game {
     protected PixelMatrix pixelMatrix; // just for convenience
     protected int counter = 0;
     protected static boolean gameOver = false;
-    protected boolean youwon = false;
+    //protected boolean youwon = false;
+    protected static boolean once = true;
+    protected static int indexGameOver;
 
 
     /* Array for storing all individual graphic objects to be drawn */
@@ -46,15 +50,35 @@ public abstract class Game {
      * Logic can be extended in the derived classes.
      */
     public void nextGameStep() {
-        if(counter % Snake.getSnakeSpeed() == 0) {
-            // set the background
-            pixelMatrix.drawBackground();
-            snakeParts.get(snakeParts.size()-1).setRichtung(snakeParts.get(snakeParts.size()-1).getRichtung());
+        if(gameOver && once) {
+            PixelMatrix.setBackgroundColor(BLACK);
+            GameOver gameOverScreen = new GameOver(2, 4);
+            graphicElements.add(gameOverScreen);
+            indexGameOver = graphicElements.size()-1;
+            //GameOver.setBodyColor(BLACK);
+            once = false;
+        } else {
+            if(counter % Snake.getSnakeSpeed() == 0) {
+                // set the background
+                pixelMatrix.drawBackground();
+                snakeParts.get(snakeParts.size()-1).setRichtung(snakeParts.get(snakeParts.size()-1).getRichtung());
 
-            //displayPixelMatrix everything
-            for (GraphicElement element : graphicElements) {
-                element.update();
-                element.render(pixelMatrix);
+                //displayPixelMatrix everything
+                for (GraphicElement element : graphicElements) {
+                    element.update();
+                    element.render(pixelMatrix);
+                }
+
+                for (Snake element : snakeParts) {
+                    element.update(snakeParts);
+                    // element.move();
+                    element.render(pixelMatrix);
+                }
+
+                for (GraphicElement element : balken) {
+                    element.update();
+                    element.render(pixelMatrix);
+                }
 
                 // Schlange verlängern wenn Frucht gegessen
                 if(Snake.getHead()) {
@@ -68,12 +92,6 @@ public abstract class Game {
                     MiniSnakeGame.setColorMatrix(kopfNewX, kopfNewY, -1);
                     Snake.setHead(false);
                 }
-            }
-
-            for (Snake element : snakeParts) {
-                element.update(snakeParts);
-                // element.move();
-                element.render(pixelMatrix);
 
                 // add new Fruit after time
                 int random = (int)(Math.random()*5 + 2);
@@ -87,16 +105,13 @@ public abstract class Game {
                     Snake.setSnakeSpeed(4);
                     MiniSnakeGame.setTimerSnakeSpeed();
                 }
-            }
 
-            for (GraphicElement element : balken) {
-                element.update();
-                element.render(pixelMatrix);
+                if(graphicElements.size() < 6) {
+                    for(int i=0; i<4; i++) {
+                        MiniSnakeGame.createRandomFruit();
+                    }
+                }
             }
-        }
-        if(gameOver){
-            GameOver gameOverScreen = new GameOver(2, 4);
-
         }
         counter++;
     }
