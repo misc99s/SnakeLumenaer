@@ -3,7 +3,7 @@ package snakeGame;
 import graphics.Color;
 import lumenaer.PixelMatrix;
 
-/**slows the snake down*/
+/**Special Fruit, is blue, makes the snake slower if Bar is full, mainly blue fruits were eaten and mouse Button is pressed*/
 
 public class BlueBerryFruit extends Fruit {
 

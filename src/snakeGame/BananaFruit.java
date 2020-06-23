@@ -4,7 +4,7 @@ import graphics.Color;
 import graphics.GraphicElement;
 import lumenaer.PixelMatrix;
 
-/**makes snake faster*/
+/**Special Fruit, is yellow, makes snake faster if Bar is full, mainly yellow fruits were eaten and mouse Button is pressed*/
 
 public class BananaFruit extends Fruit {
 

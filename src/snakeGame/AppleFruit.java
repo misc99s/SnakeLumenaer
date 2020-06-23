@@ -3,6 +3,7 @@ package snakeGame;
 import graphics.Color;
 import lumenaer.PixelMatrix;
 
+/**"Normal" Fruit, is red, doesn't do anything but can be eaten*/
 public class AppleFruit extends Fruit {
 
     public AppleFruit() {

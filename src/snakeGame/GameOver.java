@@ -9,6 +9,8 @@ import lumenaer.Game;
 import static graphics.Color.BLACK;
 import static graphics.Color.WHITE;
 
+/**The Game Over Screen, appears when you hit a wall*/
+
 public class GameOver extends SpriteGraphicElement {
     /* The actual storage of the color pixels*/
     private Color[][] pixelArray;

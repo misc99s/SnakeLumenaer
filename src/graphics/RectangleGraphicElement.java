@@ -10,6 +10,7 @@ public class RectangleGraphicElement extends GraphicElement {
 
     protected int width;
     protected int height;
+    protected Color[][] sprite;
 
     public RectangleGraphicElement(int width, int height, Color color) {
        this(0,0,width,height,color);

@@ -4,6 +4,8 @@ import graphics.GraphicElement;
 import graphics.Color;
 import lumenaer.PixelMatrix;
 
+/**The black status bar at the bottom of the interface, "fills up" when you eat a special fruit (magenta for Bananas and cyan for Blueberries) */
+
 public class Balken extends GraphicElement {
     private static int fruitsEaten = 0;
 

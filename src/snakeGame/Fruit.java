@@ -5,6 +5,7 @@ import graphics.GraphicElement;
 import graphics.RectangleGraphicElement;
 
 import java.awt.*;
+/**Base Class for Fruits, Position gets assigned randomly*/
 
 abstract class Fruit extends GraphicElement {
 
