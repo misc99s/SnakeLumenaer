@@ -4,9 +4,6 @@ Ein klassisches Snake-Spiel mit ungewöhnlicher Steuerung und einem strategische
 
 Entstanden im Rahmen des Kurses **Grundlagen der Softwareentwicklung** an der Technischen Hochschule Augsburg.
 
-!\[Gameplay Screenshot](Snake-StartGame.png)
-
-
 
 ## Features
 
@@ -21,7 +18,6 @@ Entstanden im Rahmen des Kurses **Grundlagen der Softwareentwicklung** an der Te
   * Ein Übergewicht an Blaubeeren erhöht die Wahrscheinlichkeit, dass die Snake für einige Sekunden **schneller** wird.
   * Ein Übergewicht an Bananen erhöht die Wahrscheinlichkeit, dass die Snake für einige Sekunden **langsamer** wird.
   * Das genaue Verhältnis der gesammelten Früchte beeinflusst also die Erfolgschancen des jeweiligen Effekts.
-
 
 
 ## Steuerung
